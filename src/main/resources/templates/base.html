@@ -9,10 +9,18 @@
 </head>
 <body>
 
+    <!-- common header -->
+    <div data-th-replace="~{navbar :: navbar}">
+        
+    </div>
+
     <!-- main content -->
     <section data-th-replace="${content}">
 
     </section>
+
+    <!-- common footer -->
+    <footer class="p-4">LINKEDIN | FACEB00K | GITHUB</footer>
 
     <!-- flowbite javascript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
