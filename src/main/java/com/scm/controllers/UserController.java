@@ -14,6 +14,12 @@ public class UserController {
         return "user/dashboard";
     }
     
+    // user profile page
+    @RequestMapping("/profile")
+    public String userProfile() {
+        return "user/profile";
+    }
+    
 
     // user add contact page
 
