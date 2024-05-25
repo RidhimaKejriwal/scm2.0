@@ -1,10 +1,24 @@
 package com.scm.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.scm.entities.User;
+import com.scm.forms.UserForm;
+import com.scm.services.UserService;
+
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class PageController {
+
+    @Autowired
+    private UserService userService;
     
     @RequestMapping("/home")
     public String home()
@@ -31,14 +45,42 @@ public class PageController {
     }
 
     @RequestMapping("/signup")
-    public String signupPage()
+    public String signupPage(Model model)
     {
+        UserForm UserForm = new UserForm();
+        model.addAttribute("userForm", UserForm);
         return "register";
     }
+
     @RequestMapping("/contact")
     public String contactPage()
     {
         return "contact";
+    }
+
+    // processing register
+    @RequestMapping(value="/do-register", method=RequestMethod.POST)
+    public String processRegister(@ModelAttribute UserForm userForm, HttpSession session) {
+        // fetch form data
+        System.out.println(userForm);
+        // validate form data
+        // save to database
+        
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setAbout(userForm.getAbout());
+        user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setProfilePic("default.png");
+
+        User savedUser = userService.savUser(user);
+        System.out.println(savedUser);
+        // message = "Registration successful"
+        session.setAttribute("message", "Registration Successful");
+
+        // redirect to page
+        return "redirect:/signup";
     }
 
 }
