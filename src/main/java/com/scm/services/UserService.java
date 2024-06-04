@@ -7,7 +7,7 @@ import com.scm.entities.User;
 
 public interface UserService {
 
-    User savUser(User user);
+    User saveUser(User user);
 
     Optional<User> getUserById(String id);
 
