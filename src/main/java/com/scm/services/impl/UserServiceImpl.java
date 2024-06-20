@@ -87,5 +87,11 @@ public class UserServiceImpl implements UserService {
         User updatedUser = userRepo.save(oldUser);
         return Optional.ofNullable(updatedUser);
     }
+
+    @Override
+    public User getUserByEmail(String email) {
+        
+        return userRepo.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    }
     
 }

@@ -50,12 +50,14 @@ public class PageController {
         return "services";
     }
     
+    // login page
     @RequestMapping("/login")
     public String loginPage()
     {
         return "login";
     }
 
+    // register page
     @RequestMapping("/signup")
     public String signupPage(Model model)
     {
