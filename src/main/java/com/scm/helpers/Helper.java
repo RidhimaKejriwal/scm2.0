@@ -9,9 +9,8 @@ public class Helper {
     
     public static String getEmailOfLoggedInUser(Authentication authentication) {
         
-        if (authentication instanceof  OAuth2AuthenticationToken) {
+        if (authentication instanceof  OAuth2AuthenticationToken aOAuth2AuthenticationToken) {
 
-            var aOAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
             var clientId = aOAuth2AuthenticationToken.getAuthorizedClientRegistrationId();
             var oauth2User = (OAuth2User) authentication.getPrincipal();
 

@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void deleteUser(String id) {
@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByEmail(String email) {
         
-        return userRepo.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return userRepo.findByEmail(email).orElse(null);
     }
     
 }
