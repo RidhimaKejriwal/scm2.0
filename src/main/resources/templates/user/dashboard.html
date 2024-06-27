@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>
-        This is user dashboard.
-    </h1>
+<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
 
-    <a data-th-href="@{'/logout'}">Logout</a>
+<head>
+    <title data-th-text="${user.name}+' | SCM'">Dashboard Page</title>
+</head>
+
+<body>
+    <div id="content">
+        <!-- user logged in : sidebar -->
+        <div th:if="${user}">
+            <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+        </div>
+
+        <!-- main content -->
+        <div class="mx-64 p-4 mt-4 rounded-lg pt-16">
+            <h1 class="text-2 font-bold">Welcome to Dashboard Page..</h1>
+        </div>
+    </div>
 </body>
+
 </html>
