@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" lang="en" th:fragment="parent(content, title)" xmlns:th="http://www.thymeleaf.org">
+<html class="light" lang="en" th:fragment="parent(content, title, script)" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -35,6 +35,11 @@
 
     <!-- common footer -->
     <!-- <footer class="p-4">LINKEDIN | FACEB00K | GITHUB</footer> -->
+
+    <!-- javascript -->
+    <script data-th-replace="${script}">
+
+    </script>
 
     <!-- flowbite javascript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>

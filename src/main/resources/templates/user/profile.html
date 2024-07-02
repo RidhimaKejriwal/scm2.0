@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{:: title}, ~{:: script})}">
 
 <head>
     <title data-th-text="${user.name}+' | SCM'">Profile Page</title>
@@ -17,6 +17,9 @@
             <h1 class="text-2 font-bold">Welcome to Profile Page..</h1>
         </div>
     </div>
+    <script>
+        console.log('profile page')
+    </script>
 </body>
 
 </html>

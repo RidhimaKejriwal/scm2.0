@@ -1,8 +1,11 @@
 package com.scm.controllers;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.scm.entities.Contact;
 import com.scm.entities.User;
@@ -73,7 +77,8 @@ public class ContactController {
 
         // processs contact picture 
         logger.info("file information : {}", contactForm.getContactImage().getOriginalFilename());
-        String fileURL = imageService.uploadImage(contactForm.getContactImage());
+        String filename = UUID.randomUUID().toString();
+        String fileURL = imageService.uploadImage(contactForm.getContactImage(), filename);
 
 
         Contact contact = new Contact();
@@ -88,6 +93,7 @@ public class ContactController {
         contact.setWebsiteLink(contactForm.getWebsiteLink());
         contact.setUser(user);
         contact.setPicture(fileURL);
+        contact.setCloudinaryImagePublicId(filename);
 
         // save contact
         contactService.save(contact);
@@ -100,4 +106,28 @@ public class ContactController {
 
         return "redirect:/user/contacts/add";
     }
+
+
+
+    // view contacts page
+    @RequestMapping
+    public String viewContacts(
+        @RequestParam(value="page", defaultValue="0") int page, 
+        @RequestParam(value="size", defaultValue="5") int size, 
+        @RequestParam(value="sortBy", defaultValue="name") String sortBy, 
+        @RequestParam(value="direction", defaultValue="asc") String direction, 
+        Model model, Authentication authentication) {
+
+        // get user 
+        String username = Helper.getEmailOfLoggedInUser(authentication);
+        User user = userService.getUserByEmail(username);
+
+        // get contacts of logged in user
+        Page<Contact> pageContact = contactService.getByUser(user, page, size, sortBy, direction);
+
+        model.addAttribute("pageContact", pageContact);
+
+        return "user/contacts";
+    }
+
 }

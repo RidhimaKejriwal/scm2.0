@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{:: title}, ~{:: script})}">
 
 <head>
     <title>Add Contact</title>
@@ -122,7 +122,7 @@
                                         </div>
                                         <input data-th-field="*{websiteLink}" type="text"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="name">
+                                            placeholder="website link">
                                         <p class="text-red-500" data-th-if="${#fields.hasErrors('websiteLink')}"
                                             data-th-errors="*{websiteLink}">
                                         </p>
@@ -136,7 +136,7 @@
                                         </div>
                                         <input data-th-field="*{linkedInLink}" type="text"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="name">
+                                            placeholder="linked-in">
                                         <p class="text-red-500" data-th-if="${#fields.hasErrors('linkedInLink')}"
                                             data-th-errors="*{linkedInLink}">
                                         </p>
@@ -147,12 +147,11 @@
                             <!-- contact image -->
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 for="small_size">Upload Photo</label>
-                            <input data-th-field="*{contactImage}"
+                            <input data-th-field="*{contactImage}" id="image_file_input"
                                 class="block w-full mb-5 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-blue-600 dark:placeholder-gray-400"
                                 type="file">
-                            <p class="text-red-500" data-th-if="${#fields.hasErrors('profileImage')}"
-                                data-th-errors="*{profileImage}">
-                            </p>
+                            <img class="mb-2 max-h-52 mx-auto" src="" id="upload_image_preview" alt="">
+
 
                             <!-- favorite contact -->
                             <div class="flex items-center mb-3">
@@ -182,6 +181,7 @@
             </div>
         </div>
     </div>
+    <script data-th-src="@{'/js/admin.js'}"></script>
 </body>
 
 </html>

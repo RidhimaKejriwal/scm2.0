@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{:: title})}">
+<html lang="en" th:replace="~{base :: parent(~{:: #content}, ~{:: title}, ~{:: script})}">
 
 <head>
     <title> Register Page </title>
@@ -102,6 +102,9 @@
         </div>
 
     </div>
+    <script>
+        console.log('register page')
+    </script>
 </body>
 
 </html>
