@@ -21,10 +21,11 @@ public class ContactForm {
     @NotBlank(message="Name is Required")
     private String name;
 
+    @NotBlank(message="Email is required")
     @Email(message="Invalid Email Address")
     private String email;
 
-    @NotBlank(message="Phone Number is required")
+    @NotBlank(message="Phone number is required")
     @Pattern(regexp="^[0-9]{10}$", message="Invalid Phone Number")
     private String phoneNumber;
 
@@ -39,6 +40,7 @@ public class ContactForm {
 
     private String linkedInLink;
 
-    private MultipartFile profileImage;
+    // create annotation to validate size resolution
+    private MultipartFile contactImage;
 
 }
