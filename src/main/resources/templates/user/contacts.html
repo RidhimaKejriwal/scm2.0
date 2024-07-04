@@ -13,71 +13,52 @@
         </div>
 
         <!-- main content -->
-        <div class="sm:pl-64 pt-20 mx-5 mt-2">
+        <div class="sm:pl-64 pt-20 mx-5">
             <div class="">
                 <h1 class="text-5xl text-center">All Your Contacts</h1>
                 <p class="text-center">List of all contacts..</p>
 
                 <div class="contacts_container p-5">
 
+                    <!-- message -->
+                    <div data-th-replace="~{message :: messagebox}"></div>
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <div
-                            class="p-5 flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
-                            <div>
-                                <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction"
-                                    class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                                    type="button">
-                                    <span class="sr-only">Action button</span>
-                                    Action
-                                    <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 4 4 4-4" />
-                                    </svg>
-                                </button>
-                                <!-- Dropdown menu -->
-                                <div id="dropdownAction"
-                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="dropdownActionButton">
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Reward</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Promote</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Activate
-                                                account</a>
-                                        </li>
-                                    </ul>
-                                    <div class="py-1">
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete
-                                            User</a>
+
+                        <form data-th-object="${contactSearchForm}" data-th-action="@{'/user/contacts/search'}">
+                            <div
+                                class="p-3 flex items-center space-x-3 flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900">
+                                <div>
+                                    <!-- Dropdown menu -->
+                                    <div class="max-w-sm mx-auto">
+                                        <select data-th-field="*{field}" id="countries"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option selected value="">Search By</option>
+                                            <option value="name">Name</option>
+                                            <option value="phone">Phone</option>
+                                            <option value="email">Email</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <label for="table-search" class="sr-only">Search</label>
-                            <div class="relative">
-                                <div
-                                    class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                    </svg>
+                                <label for="table-search" class="sr-only">Search</label>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                        </svg>
+                                    </div>
+                                    <input data-th-field="*{value}" type="text" id="table-search-users"
+                                        class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Search for users">
                                 </div>
-                                <input type="text" id="table-search-users"
-                                    class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Search for users">
+                                <button type="submit" class="px-3 py-2 bg-blue-500 text-white  hover:bg-blue-600 rounded">Search</button>
                             </div>
-                        </div>
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        </form>
+                        <table data-th-unless="${pageContact.isEmpty()}"
+                            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
@@ -136,50 +117,69 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <a class="px-1 text-red-500">
+                                        <!-- <a data-th-href="@{'/user/contacts/delete/'+*{id}}"
+                                         class="px-1 text-red-500">
                                             <i class="fa-solid fa-trash"></i>
-                                        </a>
-                                        <a class="px-1 text-green-500">
+                                        </a> -->
+                                        <button th:onClick="deleteContact([[${c.id}]])"
+                                         class="px-1 text-red-500">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                        <a data-th-href="@{'/user/contacts/view/'+*{id}}"
+                                         class="px-1 text-green-500">
                                             <i class="fa-solid fa-pen"></i>
                                         </a>
-                                        <a class="px-1 text-blue-500">
+                                        <button 
+                                        th:onclick="loadContactdata([[${c.id}]])" class="px-1 text-blue-500">
                                             <i class="fa-solid fa-eye"></i>
-                                        </a>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <!-- pagination component -->
-                        <div class="pagination_component p-5 text-center">
+                        <div data-th-unless="${pageContact.isEmpty()}" class="pagination_component p-2 text-center">
                             <nav aria-label="Page navigation example">
                                 <ul class="inline-flex -space-x-px text-base h-10">
-                                    <li>
-                                        <a href="#"
+                                    <li data-th-unless="${pageContact.first}">
+                                        <a data-th-href="@{'/user/contacts?size='+${pageSize}+'&page='+${pageContact.number-1}}"
                                             class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
                                     </li>
                                     <li data-th-each="index : ${#numbers.sequence(0,pageContact.totalPages-1)}">
-                                        <a data-th-href="@{'/user/contacts?size=page='+${index}}"
-                                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <a data-th-href="@{'/user/contacts?size='+${pageSize}+'&page='+${index}}"
+                                            data-th-classappend="${index==pageContact.number?'bg-blue-200 dark:bg-gray-900':'bg-white dark:bg-gray-800'}"
+                                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
                                             <span data-th-text="${index+1}"></span>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="#"
+                                    <li data-th-unless="${pageContact.last}">
+                                        <a data-th-href="@{'/user/contacts?size='+${pageSize}+'&page='+${pageContact.number+1}}"
                                             class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
-
                     </div>
-
                 </div>
 
+                <h1 data-th-if="${pageContact.isEmpty()}" class="text-5xl text-center mt-4 text-red-500"> No results
+                    found!!</h1>
+
             </div>
+
+            <!-- contacts modal -->
+            <div data-th-replace="~{user/contact_modals :: contact}">
+
+            </div>
+
+
         </div>
 
     </div>
+    <script data-th-src="@{'/js/contacts.js'}">
+
+    </script>
     <script>
         console.log('dashboard page')
     </script>
